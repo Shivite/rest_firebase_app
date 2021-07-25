@@ -4,19 +4,29 @@ import firebaseDb from "../config/Firebase";
 const Contact = () => {
     return(
         <>
-            <div className="jumbotron">
+            <div className="jumbotron jumbotron-fluid">
                 <div className="container">
-                    <h1 className="display-4">Contact Manager</h1>
+                    <h1 className="display-4 text-center">Contact Manager</h1>
                 </div>
             </div>
             <div className="row">
-                <div className="row">
-                    <div className="col-md-5">
-                        contact form
-                    </div>
-                    <div className="col-md-7">
-                        contact list
-                    </div>
+                <div className="col-md-5">
+                <table className="table table-borderless table-stripped">
+                    <thead className="thead-light">
+                        <tr>
+                            <th>Name</th>
+                            <th>Mobile</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                </div>
+                <div className="col-md-7">
+                    <ContactForm />
                 </div>
             </div>
         </>

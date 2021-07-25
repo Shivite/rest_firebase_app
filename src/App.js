@@ -4,7 +4,9 @@ import Contact from './components/Contact';
 function App() {
   return (
     <div className="row">
-        <Contact />
+      <div className="col-md-8 offset-md-2">
+        <Contact></Contact>
+      </div>
     </div>
   );
 }

@@ -1,24 +1,70 @@
-const ContactForm = () => {
-    return (
-        <div className="col-10 mx-auto">
-             <form>
-                <div className="form-group">
-                <label htmlFor="exampleInputEmail1">Email address</label>
-                <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-                </div>
-                <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Password</label>
-                <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
-                </div>
-                <div className="form-group form-check">
-                <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-                </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
-        </div>        
+import React, { useState, useEffect } from "react";
 
+const ContactForm = () => {
+
+    const [values, setValue] = useState({});
+    const handleInputChange = (e) => {
+        var {name, value }
+         = e.target;
+        setValue({
+            ...values,
+            [name] : value
+        })
+    }
+    const handleFormSubmit = (e) =>{
+        e.preventDefault();
+        console.log(values)
+    }
+    return (
+        <form autoComplete = "off" onSubmit = { handleFormSubmit }>
+            <div className="form-group input-group">
+                <div className="input-group-prepend">
+                    <div className="input-group-text">
+                        <i className="fas fa-user"></i>
+                    </div>
+                </div>
+                <input className="form-control" name="fullName" placeholder="Full Name"
+                values= {values.fullname}
+                onChange = { handleInputChange }
+                />
+            </div>
+            <div className="form-row">
+                <div className="form-group input-group col-md-6">
+                    <div className="input-group-prepend">
+                        <div className="input-group-text">
+                            <i className="fas fa-mobile-alt"></i>
+                        </div>
+                    </div>
+
+                    <input className="form-control" name="mobile" placeholder="Mobile"
+                        onChange = { handleInputChange }
+                        values= {values.mobile}
+                    />
+                </div>
+                <div className="form-group input-group col-md-6">
+                    <div className="input-group-prepend">
+                        <div className="input-group-text">
+                            <i className="fas fa-envelope"></i>
+                        </div>
+                    </div>
+                    <input className="form-control" name="email" placeholder="Email"
+                        onChange = { handleInputChange }
+                        values= {values.email}
+                    />
+                </div>
+            </div>
+            <div className="form-group">
+               <input className="form-control" name="address" placeholder="Address"
+                />
+            </div>
+            <div className="form-group">
+                <input type="submit"  className="btn btn-primary btn-block" name="address"
+                    onChange = { handleInputChange }
+                    values= {values.address}
+                />
+                
+            </div>
+        </form>
     )
 }
 
