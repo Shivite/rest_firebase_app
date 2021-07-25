@@ -4,17 +4,18 @@ const ContactForm = () => {
 
     const [values, setValue] = useState({});
     const handleInputChange = (e) => {
-        var {name, value }
-         = e.target;
+        var {name, value } = e.target;
         setValue({
             ...values,
             [name] : value
         })
     }
+
     const handleFormSubmit = (e) =>{
         e.preventDefault();
-        console.log(values)
+        
     }
+
     return (
         <form autoComplete = "off" onSubmit = { handleFormSubmit }>
             <div className="form-group input-group">
@@ -55,14 +56,12 @@ const ContactForm = () => {
             </div>
             <div className="form-group">
                <input className="form-control" name="address" placeholder="Address"
-                />
+                onChange = { handleInputChange }
+                values= {values.address}
+               />
             </div>
             <div className="form-group">
-                <input type="submit"  className="btn btn-primary btn-block" name="address"
-                    onChange = { handleInputChange }
-                    values= {values.address}
-                />
-                
+                <input type="submit"  className="btn btn-primary btn-block" />
             </div>
         </form>
     )
