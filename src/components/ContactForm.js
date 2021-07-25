@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const ContactForm = () => {
-
+const ContactForm = (props) => {
     const [values, setValue] = useState({});
     const handleInputChange = (e) => {
         var {name, value } = e.target;
@@ -13,7 +12,7 @@ const ContactForm = () => {
 
     const handleFormSubmit = (e) =>{
         e.preventDefault();
-        
+        props.addOrEdit(values);
     }
 
     return (

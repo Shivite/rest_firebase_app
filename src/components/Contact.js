@@ -2,6 +2,19 @@ import react, { useState, useEffect } from "react";
 import ContactForm from "./ContactForm";
 import firebaseDb from "../config/Firebase";
 const Contact = () => {
+    console.log(firebaseDb)
+    const addOrEdit = (obj) => {
+        
+        firebaseDb.child('contact').push(
+            obj,
+            err => {
+                if(err) 
+                    console.log(err)
+                else    
+                    console.log("success")
+            }
+        )
+    }
     return(
         <>
             <div className="jumbotron jumbotron-fluid">
@@ -26,7 +39,7 @@ const Contact = () => {
                 </table>
                 </div>
                 <div className="col-md-7">
-                    <ContactForm />
+                    <ContactForm addOrEdit = {addOrEdit}/>
                 </div>
             </div>
         </>

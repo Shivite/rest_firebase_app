@@ -11,6 +11,12 @@ let config = {
     measurementId: "G-92QXPPGQBP"
 
 };
-firebase.initializeApp(config);
-
-export default firebase;
+class Firebase {
+    constructor() {
+      firebase.initializeApp(config);
+    }
+    database() {
+      return firebase.database();
+    }
+  }
+  export default Firebase;
