@@ -1,6 +1,12 @@
-import * as firebase from 'firebase';
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
 
-let config = {
+
+
+
+
+let firebaseConfig = {
     apiKey: "AIzaSyD2OTLdC9ntPWw8fgGeZ0nOfA4NQ_ajUFM",
     authDomain: "testfirebase-23e1b.firebaseapp.com",
     databaseURL: "https://testfirebase-23e1b-default-rtdb.firebaseio.com",
@@ -11,12 +17,6 @@ let config = {
     measurementId: "G-92QXPPGQBP"
 
 };
-class Firebase {
-    constructor() {
-      firebase.initializeApp(config);
-    }
-    database() {
-      return firebase.database();
-    }
-  }
-  export default Firebase;
+var fireDb = firebase.initializeApp(firebaseConfig);
+
+export default fireDb.database().ref();

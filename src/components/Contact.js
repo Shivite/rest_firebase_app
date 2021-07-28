@@ -4,16 +4,8 @@ import firebaseDb from "../config/Firebase";
 const Contact = () => {
     console.log(firebaseDb)
     const addOrEdit = (obj) => {
-        
-        firebaseDb.child('contact').push(
-            obj,
-            err => {
-                if(err) 
-                    console.log(err)
-                else    
-                    console.log("success")
-            }
-        )
+        console.log("data", obj)
+        firebaseDb('contact');
     }
     return(
         <>
