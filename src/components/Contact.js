@@ -3,8 +3,16 @@ import ContactForm from "./ContactForm";
 import firebaseDb from "../config/Firebase";
 const Contact = () => {
     console.log(firebaseDb)
+    const [contactObjects, setContactObjects] = useState({});
+    useEffect(()=>{
+        firebaseDb.child('contact').on('value', snapshot => {
+            if(snapshot.val() !== null){
+                setContactObjects({ ...snapshot.val() })
+            }
+        })
+    },[])
+
     const addOrEdit = (obj) => {
-        
         firebaseDb.child('contact').push(
             obj,
             err => {
@@ -16,6 +24,7 @@ const Contact = () => {
         )
     }
     return(
+        
         <>
             <div className="jumbotron jumbotron-fluid">
                 <div className="container">
@@ -34,7 +43,13 @@ const Contact = () => {
                         </tr>
                     </thead>
                     <tbody>
-
+                    {Object.keys(contactObjects).map(key =>   (
+                        <tr key={key}>
+                            <td>{contactObjects[key].fullName}</td>
+                            <td>{contactObjects[key].mobile}</td>
+                            <td>{contactObjects[key].email}</td>
+                        </tr>
+                    ))}           
                     </tbody>
                 </table>
                 </div>
