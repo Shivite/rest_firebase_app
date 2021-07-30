@@ -39,7 +39,7 @@ const Contact = () => {
                             <th>Name</th>
                             <th>Mobile</th>
                             <th>Email</th>
-                            <th>Actions</th>
+                            <th>Actions buttons</th>
                         </tr>
                     </thead>
                     <tbody>
