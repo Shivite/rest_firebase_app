@@ -4,6 +4,7 @@ import firebaseDb from "../config/Firebase";
 const Contact = () => {
     console.log(firebaseDb)
     const [contactObjects, setContactObjects] = useState({});
+    const [editRecord, setEditRecord] = useState("123");
     useEffect(()=>{
         firebaseDb.child('contact').on('value', snapshot => {
             if(snapshot.val() !== null){
@@ -11,7 +12,9 @@ const Contact = () => {
             }
         })
     },[])
-
+    const getRecordId = (id) => {
+        
+    }
     const addOrEdit = (obj) => {
         firebaseDb.child('contact').push(
             obj,
@@ -23,6 +26,7 @@ const Contact = () => {
             }
         )
     }
+    
     return(
         
         <>
@@ -32,7 +36,7 @@ const Contact = () => {
                 </div>
             </div>
             <div className="row">
-                <div className="col-md-5">
+                <div className="col-md-7">
                 <table className="table table-borderless table-stripped">
                     <thead className="thead-light">
                         <tr>
@@ -43,17 +47,27 @@ const Contact = () => {
                         </tr>
                     </thead>
                     <tbody>
-                    {Object.keys(contactObjects).map(key =>   (
-                        <tr key={key}>
-                            <td>{contactObjects[key].fullName}</td>
-                            <td>{contactObjects[key].mobile}</td>
-                            <td>{contactObjects[key].email}</td>
+                    {Object.keys(contactObjects).map( (id) =>   (
+                        <tr key={id}>
+                            <td>{contactObjects[id].fullName}</td>
+                            <td>{contactObjects[id].mobile}</td>
+                            <td>{contactObjects[id].email}</td>
+                            <td>
+                                <button className="btn btn-primary"
+                                    onClick = { () => setEditRecord(id) }
+                                >
+                                    ED
+                                </button>
+                                <button className="btn btn-danger">
+                                    DL
+                                </button>
+                            </td>
                         </tr>
                     ))}           
                     </tbody>
                 </table>
                 </div>
-                <div className="col-md-7">
+                <div className="col-md-5">
                     <ContactForm addOrEdit = {addOrEdit}/>
                 </div>
             </div>
