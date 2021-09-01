@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 const ContactForm = (props) => {
+    const initialValues = {
+        fullname:'',
+        email:'',
+        mobile:'',
+        address:''
+    }
     const [values, setValue] = useState({});
     const handleInputChange = (e) => {
         var {name, value } = e.target;
@@ -9,12 +15,18 @@ const ContactForm = (props) => {
             [name] : value
         })
     }
-
+    useEffect (() => {
+        if(props.editRecord == '')
+            setValue({...initialValues})
+        else
+            setValue({...props.contactObjects[props.editRecord]})
+        console.log(values)
+    },[props.editRecord, props.contactObjects])
+    
     const handleFormSubmit = (e) =>{
         e.preventDefault();
         props.addOrEdit(values);
     }
-
     return (
         <form autoComplete = "off" onSubmit = { handleFormSubmit }>
             <div className="form-group input-group">
@@ -23,8 +35,8 @@ const ContactForm = (props) => {
                         <i className="fas fa-user"></i>
                     </div>
                 </div>
-                <input className="form-control" name="fullName" placeholder="Full Name"
-                values= {values.fullname}
+                <input className="form-control" name="fullname" placeholder="Full Name"
+                value= {values.fullname}
                 onChange = { handleInputChange }
                 />
             </div>
@@ -38,7 +50,7 @@ const ContactForm = (props) => {
 
                     <input className="form-control" name="mobile" placeholder="Mobile"
                         onChange = { handleInputChange }
-                        values= {values.mobile}
+                        value= {values.mobile}
                     />
                 </div>
                 <div className="form-group input-group col-md-6">
@@ -49,14 +61,14 @@ const ContactForm = (props) => {
                     </div>
                     <input className="form-control" name="email" placeholder="Email"
                         onChange = { handleInputChange }
-                        values= {values.email}
+                        value= {values.email}
                     />
                 </div>
             </div>
             <div className="form-group">
                <input className="form-control" name="address" placeholder="Address"
                 onChange = { handleInputChange }
-                values= {values.address}
+                value= {values.address}
                />
             </div>
             <div className="form-group">

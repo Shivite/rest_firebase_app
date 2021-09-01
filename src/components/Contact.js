@@ -3,6 +3,7 @@ import ContactForm from "./ContactForm";
 import firebaseDb from "../config/Firebase";
 const Contact = () => {
     const [ contactObjects, setContactObjects] = useState({});
+    const [ editRecord, setEditRecord] = useState('');
 
     useEffect(()=>{
         firebaseDb.child('contact').on('value', function(snapshot) {
@@ -10,8 +11,7 @@ const Contact = () => {
                 setContactObjects({ ...snapshot.val() })
             }
         })
-        console.log(contactObjects)
-    },[])
+    },[editRecord])
 
     const addOrEdit = (obj) => {
         console.log(obj);
@@ -44,11 +44,13 @@ const Contact = () => {
                         </tr>
                         {Object.keys(contactObjects).map(id => {
                             return <tr key={id}>
-                                <td>{contactObjects[id].fullName}</td>
+                                <td>{contactObjects[id].fullname}</td>
                                 <td>{contactObjects[id].mobile}</td>
                                 <td>{contactObjects[id].email}</td>
                                 <td>
-                                    <a classname = "btn btn-primary"> 
+                                    <a className = "btn btn-primary"
+                                    onClick = {() => setEditRecord(id)}
+                                    > 
                                         Edit   
                                     </a>
                                     <a classname = "btn btn-primary"> 
@@ -65,7 +67,7 @@ const Contact = () => {
                 </table>
                 </div>
                 <div className="col-md-7">
-                    <ContactForm addOrEdit = {addOrEdit}/>
+                    <ContactForm {...({addOrEdit, editRecord, contactObjects})}/>
                 </div>
             </div>
         </>
