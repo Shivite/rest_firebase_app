@@ -1,8 +1,18 @@
-import react, { useState, useEffect } from "react";
+import React, { useState,useEffect } from 'react';
 import ContactForm from "./ContactForm";
 import firebaseDb from "../config/Firebase";
 const Contact = () => {
-    console.log(firebaseDb)
+    const [ contactObjects, setContactObjects] = useState({});
+
+    useEffect(()=>{
+        firebaseDb.child('contact').on('value', function(snapshot) {
+            if(snapshot.val()!== null){
+                setContactObjects({ ...snapshot.val() })
+            }
+        })
+        console.log(contactObjects)
+    },[])
+
     const addOrEdit = (obj) => {
         console.log(obj);
         firebaseDb.child('contact').push(
@@ -32,6 +42,22 @@ const Contact = () => {
                             <th>Email</th>
                             <th>Actions</th>
                         </tr>
+                        {Object.keys(contactObjects).map(id => {
+                            return <tr key={id}>
+                                <td>{contactObjects[id].fullName}</td>
+                                <td>{contactObjects[id].mobile}</td>
+                                <td>{contactObjects[id].email}</td>
+                                <td>
+                                    <a classname = "btn btn-primary"> 
+                                        Edit   
+                                    </a>
+                                    <a classname = "btn btn-primary"> 
+                                        Del
+                                    </a>
+                                </td>
+                            </tr>
+                        })} 
+                       
                     </thead>
                     <tbody>
 
