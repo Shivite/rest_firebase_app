@@ -14,9 +14,31 @@ const Contact = () => {
     },[editRecord])
 
     const addOrEdit = (obj) => {
-        console.log(obj);
-        firebaseDb.child('contact').push(
-            obj,
+        if(editRecord == ''){
+            firebaseDb.child('contact').push(
+                obj,
+                err => {
+                    if(err) 
+                        console.log(err)
+                    else    
+                        console.log("success")
+                }
+            )
+        }else {
+            firebaseDb.child(`contact/${editRecord}`).set(
+                obj,
+                err => {
+                    if(err) 
+                        console.log(err)
+                    else    
+                        console.log("success")
+                }
+            )
+        }
+    }
+
+    const deleteRec = key => {
+        firebaseDb.child(`contact/${key}`).remove(
             err => {
                 if(err) 
                     console.log(err)
@@ -53,7 +75,10 @@ const Contact = () => {
                                     > 
                                         Edit   
                                     </a>
-                                    <a classname = "btn btn-primary"> 
+                                    <a classname = "btn btn-primary"
+                                    onClick = {() => deleteRec(id)}
+                                    
+                                    > 
                                         Del
                                     </a>
                                 </td>

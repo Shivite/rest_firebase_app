@@ -72,7 +72,7 @@ const ContactForm = (props) => {
                />
             </div>
             <div className="form-group">
-                <input type="submit"  className="btn btn-primary btn-block" />
+                <input type="submit"  value = {props.editRecord == '' ? 'Submit' : 'update' } className="btn btn-primary btn-block" />
             </div>
         </form>
     )
